@@ -1,0 +1,13 @@
+﻿@model SummerProject.Models.Book
+
+<h2>@ViewData["Message"]</h2>
+
+
+<h2>@Model.Title</h2>
+<p>Author: @Model.Author.Name</p>
+<p>Categories: @string.Join(", ", Model.BookCategories.Select(bc => bc.Category.Name))</p>
+
+<a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+<a asp-action="Index">Back to list</a>
+
+

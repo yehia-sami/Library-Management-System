@@ -1,0 +1,47 @@
+﻿@model List<SummerProject.Models.Book>
+
+@{
+    var message = TempData["Success message"];
+}
+
+@if (message != null)
+{
+    <h2>@message</h2>
+}
+
+<h2>Books</h2>
+
+<div id="bookContainer">
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Categories</th>
+            <th>Actions</th>
+        </tr>
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td>@book.Title</td>
+                <td>@book.Author?.Name</td>
+                <td>@string.Join(", ", book.BookCategories.Select(bc => bc.Category.Name))</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@book.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@book.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@book.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<button id="loadBooks">Load Books</button>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $("#loadBooks").click(function () {
+        $("#bookContainer").load("/Books/BookListPartial");
+    });
+</script>
+
+<a asp-action="Create">Add Book</a>

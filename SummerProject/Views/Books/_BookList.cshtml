@@ -1,0 +1,17 @@
+﻿@model List<SummerProject.Models.Book>
+
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Categories</th>
+    </tr>
+    @foreach (var book in Model)
+    {
+        <tr>
+            <td>@book.Title</td>
+            <td>@book.Author?.Name</td>
+            <td>@string.Join(", ", book.BookCategories.Select(bc => bc.Category.Name))</td>
+        </tr>
+    }
+</table>

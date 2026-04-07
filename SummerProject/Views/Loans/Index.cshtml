@@ -1,0 +1,31 @@
+﻿@model List<SummerProject.Models.Loan>
+
+<h2>Loans</h2>
+
+<p>
+    <a asp-action="Create" >New Loan</a>
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Book</th>
+            <th>Customer</th>
+            <th>Loan Date</th>
+            <th>Return Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var loan in Model)
+        {
+            <tr>
+                <td>@loan.Book.Title</td>
+                <td>@loan.Customer.FullName</td>
+                <td>@loan.LoanDate.ToShortDateString()</td>
+                <td>@(loan.ReturnDate.ToShortDateString() ?? "Not Returned")</td>
+               
+            </tr>
+        }
+    </tbody>
+</table>

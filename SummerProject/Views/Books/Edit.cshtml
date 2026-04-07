@@ -1,0 +1,43 @@
+﻿@model SummerProject.Models.Book
+
+<h2>Edit Book</h2>
+
+<form asp-action="Edit" method="post">
+    
+    <input type="hidden" asp-for="Id" />
+
+    <div>
+        <label asp-for="Title"></label>
+        <input asp-for="Title" />
+        <span asp-validation-for="Title"></span>
+    </div>
+
+  
+
+    <div>
+        <label asp-for="AuthorId">Author</label>
+        <select asp-for="AuthorId"
+                asp-items="@(new SelectList(ViewBag.Authors, "Id", "Name"))">
+           
+        </select>
+
+    </div>
+
+    <div>
+        <label>Categories</label><br />
+        @foreach (var category in (List<SummerProject.Models.Category>)ViewBag.Categories)
+        {
+            var isChecked = ViewBag.SelectedCategories != null &&
+            ((int[])ViewBag.SelectedCategories).Contains(category.Id);
+            <input type="checkbox" name="selectedCategories" value="@category.Id" @(isChecked ? "checked" : "") />
+            @category.Name <br />
+        }
+    </div>
+
+
+    <button type="submit">Update</button>
+</form>
+
+
+
+

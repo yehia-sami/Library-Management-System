@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityUser>
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<h1>Admin Dashboard</h1>
+
+<div>
+    <h3>Summary</h3>
+    <ul>
+        <li>Total Books: @ViewBag.TotalBooks</li>
+        <li>Total Categories: @ViewBag.TotalCategories</li>
+        <li>Total Customers: @ViewBag.TotalCustomers</li>
+        <li>Total Loans: @ViewBag.TotalLoans</li>
+    </ul>
+</div>
+
+
+<div>
+    <h3>Quick Actions</h3>
+    <ul>
+        <li><a asp-controller="Books" asp-action="Create">Add New Book</a></li>
+        <li><a asp-controller="Categories" asp-action="Create">Add New Category</a></li>
+        <li><a asp-controller="Loans" asp-action="Create">Add New Loan</a></li>
+        <li><a asp-controller="Account" asp-action="Register">Add New Customer</a></li>
+    </ul>
+</div>
+<li><strong> Current Account : @ViewBag.CurrentUserEmail</strong></li>
+<div>
+    <h3>Manage Users</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Email</td>
+                    <td>
+                        <form asp-action="AddUserToRole" method="post" >
+                            <input type="hidden" name="userId" value="@user.Id" />
+                            <input type="hidden" name="role" value="Admin" />
+                            <button type="submit">Make Admin</button>
+                        </form>
+                        <form asp-action="AddUserToRole" method="post" >
+                            <input type="hidden" name="userId" value="@user.Id" />
+                            <input type="hidden" name="role" value="User" />
+                            <button type="submit">Make User</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

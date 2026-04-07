@@ -1,0 +1,28 @@
+﻿@model List<SummerProject.Models.Customer>
+
+<h2>Customers</h2>
+
+<p>
+    <a asp-action="Create">Add New Customer</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Loans Count</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.FullName</td>
+                <td>@item.Email</td>
+                <td>@item.Loans.Count</td>
+            </tr>
+        }
+    </tbody>
+</table>

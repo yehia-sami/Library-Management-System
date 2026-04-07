@@ -1,0 +1,28 @@
+﻿@model SummerProject.Models.Loan
+
+<h2>Create Loan</h2>
+
+<form asp-action="Create" method="post">
+    <div>
+        <label asp-for="BookId">Book</label>
+        <select asp-for="BookId" asp-items="@(new SelectList(ViewBag.Books, "Id", "Title"))">
+            <option value="">-- Select Book --</option>
+        </select>
+        <span asp-validation-for="BookId"></span>
+    </div>
+
+    <div>
+        <label asp-for="CustomerId">Customer</label>
+        <select asp-for="CustomerId" asp-items="@(new SelectList(ViewBag.Customers, "Id", "FullName"))">
+            <option value="">-- Select Customer --</option>
+        </select>
+        <span asp-validation-for="CustomerId"></span>
+    </div>
+    <div>
+        <label asp-for="ReturnDate"></label>
+        <input asp-for="ReturnDate" type="date" />
+        <span asp-validation-for="ReturnDate"></span>
+    </div>
+
+    <button type="submit">Save</button>
+</form>
